@@ -1,0 +1,29 @@
+{
+  "pythonVersion": "3.11",
+  "pythonPlatform": "Linux",
+  "venvPath": "/home/adrian/miniconda3/envs",
+  "venv": "cnn",
+  "include": ["."],
+  "reportMissingImports": true,
+  "reportMissingModuleSource": false,
+  "analysis": {
+    "autoSearchPaths": true,
+    "useLibraryCodeForTypes": true,
+    "diagnosticMode": "workspace",
+    "typeCheckingMode": "basic"
+  },
+  "executionEnvironments":[
+  {
+    "root":".",
+    "extraPaths": [
+        ".", 
+        "/lib",
+        "/parte_1",
+        "/parte_2",
+        "/utils",
+        "/parte_2/models"
+      ]
+    }
+  ]
+}
+
