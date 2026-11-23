@@ -1,0 +1,147 @@
+\documentclass[conference]{IEEEtran}
+\usepackage[utf8]{inputenc}       
+\usepackage[T1]{fontenc}          
+\usepackage[spanish]{babel} 
+\usepackage{cite}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em\TeX}}
+\begin{document}
+
+\title{Tarea 2}
+
+\author{
+    \IEEEauthorblockN{Rodríguez González José Adrián}
+    \IEEEauthorblockA{\textit{Universidad de Guanajuato} \\
+    ja.rodriguez.g@ugto.mx}
+}
+\maketitle
+\begin{abstract}
+En este trabajo se realiza una tarea de clasificación de principio a fin, desde la recolección de los datos, culminando con el entrenamiento de un árbol de decisiones,
+\end{abstract}
+\begin{IEEEkeywords}
+Sistemas basados en reglas
+\end{IEEEkeywords}
+\section{Introducción}
+En este trabajo se realizó la recolección de los datos, se tomaron capturas a 6 objetos
+\begin{itemize}
+    \item Cono
+    \item Taza
+    \item Carro
+    \item Botella de cloro
+    \item SIlla
+    \item Figura de juguete
+\end{itemize}
+Para esta tarea, se necesito una cámara Intel realsense 430. Por medio de esta cámara capturaba las nubes de puntos en profundidad. Durante la toma de capturas se realizaron procesos de filtrado para poderle calcular características independientes entre sí. Al calcular las características se subsamplea dado a la cantidad de números de puntos y finalmente se entrena un modelo de árbol de decisión. Todos estos procesos se realizaron con técnicas vistas hasta el momento
+\section{Metodología}
+Se creo un entorno de conda con los siguientes comandos
+\begin{verbatim}
+# !/bin/bash
+conda create --name ml python=3.9
+conda activate ml
+conda install pip
+pip install open3d opencv-python pyrealsense2 datetime
+\end{verbatim}
+Esto es necesario debido a que el script desarrollado en python para tomar capturas se realizó con paquetes que tienen disponibilidad en la versión de python 3.9, si se realiza con una versión más reciente, existen paquetes que terminan en conflictos. El script únicamente toma las capturas con el botón \textit{q} y se termina de ejecutar el programa con el comando \textit{ESC}. Las imágenes se almacenan dentro de la carpeta llamada \textit{captured_data}, Dentro de ella se crean carpetas con la fecha y hora de creación de las carpetas.
+
+\subsection{Toma de fotos}
+Para la toma de foto se realizaron diversos experimentos en diversos escenarios. El primero de ellos fue poner un objeto dentro de una caja con material de cuero negro. Sin embargo, tomaba demasiados puntos del fondo, por lo que se optó en utilizar vasos de vidrio y arriba de ellos cada uno de los objetos, como se puede observar en la figura 
+
+\bibliographystyle{IEEEtran}
+\bibliography{referencias}
+
+\end{document}
+
+random_state=42,max_depth=5,min_samples_split=5,ccp_alpha=0.001
+Accuracy train:0.9706840390879479
+Accuracy test:0.9603174603174603
+Diferencia: 0.010366578770487522
+              precision    recall  f1-score   support
+
+       carro       1.00      0.86      0.92        21
+       cloro       0.88      1.00      0.93        21
+        cono       1.00      1.00      1.00        21
+     munieco       0.95      0.95      0.95        21
+       silla       1.00      1.00      1.00        21
+        taza       0.95      0.95      0.95        21
+
+    accuracy                           0.96       126
+   macro avg       0.96      0.96      0.96       126
+weighted avg       0.96      0.96      0.96       126
+
+DecisionTreeClassifier(random_state=42,max_depth=5,min_samples_split=5,ccp_alpha=0.001,criterion='entropy')
+Accuracy train:0.996742671009772
+Accuracy test:0.873015873015873
+Diferencia: 0.12372679799389896
+              precision    recall  f1-score   support
+
+       carro       1.00      0.86      0.92        21
+       cloro       0.88      1.00      0.93        21
+        cono       0.62      1.00      0.76        21
+     munieco       1.00      1.00      1.00        21
+       silla       1.00      1.00      1.00        21
+        taza       1.00      0.38      0.55        21
+
+    accuracy                           0.87       126
+   macro avg       0.92      0.87      0.86       126
+weighted avg       0.92      0.87      0.86       126
+DecisionTreeClassifier(random_state=42,max_depth=5,min_samples_split=5,ccp_alpha=0.001,criterion='log_loss')
+
+Accuracy train:0.996742671009772
+Accuracy test:0.873015873015873
+Diferencia: 0.12372679799389896
+              precision    recall  f1-score   support
+
+       carro       1.00      0.86      0.92        21
+       cloro       0.88      1.00      0.93        21
+        cono       0.62      1.00      0.76        21
+     munieco       1.00      1.00      1.00        21
+       silla       1.00      1.00      1.00        21
+        taza       1.00      0.38      0.55        21
+
+    accuracy                           0.87       126
+   macro avg       0.92      0.87      0.86       126
+weighted avg       0.92      0.87      0.86       126
+
+
+
+
+modelo=DecisionTreeClassifier(random_state=42,max_depth=5,min_samples_split=5,ccp_alpha=0.005)
+Accuracy train:0.9706840390879479
+Accuracy test:0.9603174603174603
+Diferencia: 0.010366578770487522
+              precision    recall  f1-score   support
+
+       carro       1.00      0.86      0.92        21
+       cloro       0.88      1.00      0.93        21
+        cono       1.00      1.00      1.00        21
+     munieco       0.95      0.95      0.95        21
+       silla       1.00      1.00      1.00        21
+        taza       0.95      0.95      0.95        21
+
+    accuracy                           0.96       126
+   macro avg       0.96      0.96      0.96       126
+weighted avg       0.96      0.96      0.96       126
+
+modelo=DecisionTreeClassifier(random_state=42,max_depth=4,min_samples_split=5,ccp_alpha=0.005)
+
+ccuracy train:0.9413680781758957
+Accuracy test:0.9365079365079365
+Diferencia: 0.004860141667959228
+              precision    recall  f1-score   support
+
+       carro       1.00      0.76      0.86        21
+       cloro       0.87      0.95      0.91        21
+        cono       1.00      1.00      1.00        21
+     munieco       0.95      0.95      0.95        21
+       silla       1.00      1.00      1.00        21
+        taza       0.83      0.95      0.89        21
+
+    accuracy                           0.94       126
+   macro avg       0.94      0.94      0.94       126
+weighted avg       0.94      0.94      0.94       126
