@@ -1,0 +1,6 @@
+p: numero  de caracteustucas del dataset
+d: numero caracteristicas seleccionadas 
+Donde p>d
+
+
+EL problema de selección de caracterísitcas requieren una combinación p!/(p-d)!d!
