@@ -1,0 +1,10 @@
+train_acc: 0.9060 val_acc: 0.9445 train_loss: 0.2649 val_loss: 0.1598
+train_acc: 0.9706 val_acc: 0.9649 train_loss: 0.0881 val_loss: 0.1309
+train_acc: 0.9837 val_acc: 0.9576 train_loss: 0.0469 val_loss: 0.1583
+train_acc: 0.9911 val_acc: 0.9536 train_loss: 0.0289 val_loss: 0.1810
+train_acc: 0.9888 val_acc: 0.9508 train_loss: 0.0354 val_loss: 0.1840
+train_acc: 0.9921 val_acc: 0.9406 train_loss: 0.0246 val_loss: 0.2580
+train_acc: 0.9933 val_acc: 0.9643 train_loss: 0.0239 val_loss: 0.1848
+train_acc: 0.9976 val_acc: 0.9649 train_loss: 0.0092 val_loss: 0.1997
+train_acc: 0.9994 val_acc: 0.9632 train_loss: 0.0031 val_loss: 0.2109
+train_acc: 0.9996 val_acc: 0.9649 train_loss: 0.0027 val_loss: 0.2135
