@@ -1,0 +1,37 @@
+227.00453734397888
+Mejores parámetros: {'n_estimators': 900, 'max_depth': 99, 'min_samples_split': 5, 'min_samples_leaf': 1, 'bootstrap': False, 'max_features': 'sqrt', 'criterion': 'gini'}
+Mejor score CV: 0.9920701754385967
+Accuracy en test: 0.9841269841269841
+58.35918951034546
+{'n_estimators': 900, 'max_depth': 99, 'min_samples_split': 5, 'min_samples_leaf': 1, 'bootstrap': False, 'max_features': 'sqrt', 'criterion': 'gini'}
+0.9920701754385967
+RandomForestClassifier(bootstrap=False, max_depth=99, min_samples_split=5,
+                       n_estimators=900, n_jobs=-1, random_state=42)
+0.9841269841269841number
+value
+datetime_start
+datetime_complete
+duration
+params_bootstrap
+params_criterion
+params_max_depth
+params_max_features
+params_max_samples
+params_min_samples_leaf
+params_min_samples_split
+params_n_estimators
+state
+number
+value
+datetime_start
+datetime_complete
+duration
+params_bootstrap
+params_criterion
+params_max_depth
+params_max_features
+params_max_samples
+params_min_samples_leaf
+params_min_samples_split
+params_n_estimators
+state

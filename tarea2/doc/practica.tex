@@ -1,0 +1,180 @@
+\documentclass[conference]{IEEEtran}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+
+\title{Tarea 2}
+
+\author{
+    \IEEEauthorblockN{José Adrián Rodríguez González}
+    \IEEEauthorblockA{Universidad de Guanajuato\\ja.rodriguez.g@ugto.mx}
+}
+
+\maketitle
+
+\begin{abstract}
+Retomando lo previamente observado en la tarea 1 y analizado del conjunto de datos de características, se evaluaron 3 modelos diferente, Random Forest, AdaBoost Y GradientBoost. El decision Tree que se evaluó la anterior vez, se encontró que presentaba un accuracy de 96 \% de test y se tomará de referencia. Además de que se compararon los mapas de confusiones entres estos modelos
+\end{abstract}
+
+\section{Introducción}
+Los Decision Tree son modelos simples y clásicos que se usan ampliamente por su explicatividad, sin embargo, es un modelo algo simple, por lo que sé realizaron pruebas en base al conjunto de datoas que tiene coordenadas $x,y,z$ para la coordenadas de puntos de imágenes capturadas. Sin embargo, se calcularon métricas para evaluarlo. De las cuales fueron 10 y se submuestrearon en distintos porcentajes de puntos y se genero un conjunto de datos. El árbol de decisión ha sido entrenado con este conjunto de datos, y para poner en persectiva lo obtenido con los otros modelos, se entrenó un Random forest, AdaBoost y un Gradient Boost
+\section{Metodología}
+En base a la teoría vista en clase sobre los tres modelos se utilizó la librería de scikit que posee los tres modelos. Sin embargo, se les pasará un proceso de búsqueda de hiperpárametros. Existen diversos métodos, uno que siguen fuerza bruta como grid search y random forest. Sin embargo, random forest es más probábilistico. Seguido por modelos como política de reinforcement learning, evolutivos y modelos que se basan en optimización bayesianas. Para esta ocasión, por la sencillez de las pruebas se utilizó el de fuerza bruta \textit{grid search},y para cada modelo se les aplico la siguiente malla de párametros (Cuadro. \ref{tab:Tabla_1})
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|l|l|c|}
+    \hline
+    \textbf{Parámetro} & \textbf{Valores posibles} & \textbf{Nº de valores} \\ \hline
+    \texttt{n\_estimators} & \{50, 70, 100, 200, 500\} & 5 \\ \hline
+    \texttt{max\_depth} & \{None, 5, 10, 20\} & 4 \\ \hline
+    \texttt{min\_samples\_split} & \{2, 5, 7, 10\} & 4 \\ \hline
+    \texttt{min\_samples\_leaf} & \{1, 2, 3, 4\} & 4 \\ \hline
+    \texttt{bootstrap} & \{True, False\} & 2 \\ \hline
+    \end{tabular}
+    \caption{Espacio de búsqueda de hiperparámetros para Random Forest}
+    \label{tab:Tabla_1}
+\end{table}
+Podemos observar que tenemos esa cantidad de valores, por lo que podemos calcular la cantidad de posibles combinaciones siendo de $5\times4\times 4 \times 4 \times2 =640$ combinaciones. 
+Estos párametros son los que por lo general se suelen modificar, el número de estimadores que corresponde a la cantidad de árboles de decisión que habrá en el bosque. La profundidad es que tantas condiciones llegará cada árbol. La cantidad mínima de muestras por división; corresponde a la cantidad de muestras tomadas por nodo antes de que se llegue a dividir. Del otro lado, la cantidad mínima de muestras por hoja corresponde a cuantos ejemplares se toman para cada nodo/hoja al hacer la división. Y existe otra opción para el árbol y es que se puede desactivar el boosting,(el método por el cual dentro del conjunto de datos va a haciendo muestras con remplazo de elementos,algo que le permite tener más diversidad y reduciendo la varianza). Sin embargo, este parámetro por lo general está activo y es recomendable usarlo en Random Forest, ya que las bondades que tiene el muestrear con reemplazo a solo realizar muestras generales, hace que se evite el overfitting en nuestro modelo.
+Para adaboost se puede ver la lista de hiperpárametros en el(Cuadro \ref{tab:Tabla_2})
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l|l|c|}
+\hline
+\textbf{Parámetro} & \textbf{Valores posibles} & \textbf{Nº de valores} \\ \hline
+\texttt{n\_estimators} & \{50, 100, 200\} & 3 \\ \hline
+\texttt{learning\_rate} & \{0.01,  0.05, 0.1\} & 3 \\ \hline
+\texttt{max\_depth} & \{1, 2, 3\} & 3 \\ \hline
+\texttt{min\_samples\_split} & \{2, 5, 10\} & 3 \\ \hline
+\end{tabular}
+\caption{Espacio de búsqueda de hiperparámetros para AdaBoost}
+    \label{tab:Tabla_2}
+\end{table}
+Dado a que adaboost se podría ver como un mejorador de modelos, y en este caso se basa en los árboles de decisión, los hiperpárametros a evaluar serán en parte los mismos del árbol de decisión, sin embargo se añade la tasa de aprendizaje. A diferencia de los métodos de bagging, los métodos de boosting como ada y gradient, ajustan para todos los datos, cada árbol se genera de forma sucesiva, usa además los residuos de cada clasificador y ponder las muestras mal clasificadas. Así que para realizar esas ponderaciones nos ayuda la taza de aprendizaje. Al igual que en métodos de optimización convencionales, se usa una taza menor a $0.1$. La cantidad de combinaciones posibles son $3^4=81$
+Además, en el (Cuadro \ref{tab:Tabla_3})
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l|l|c|}
+\hline
+\textbf{Parámetro} & \textbf{Valores posibles} & \textbf{Nº de valores} \\ \hline
+\texttt{n\_estimators} & \{50, 100, 200\} & 3 \\ \hline
+\texttt{learning\_rate} & \{0.01,  0.05, 0.1\} & 3 \\ \hline
+\texttt{max\_depth} & \{2, 3,5,8\} & 4 \\ \hline
+\texttt{min\_samples\_split} & \{2, 5, 10\} & 3 \\ \hline
+\texttt{min\_samples\_leaf} & \{1, 2, 4\} & 3 \\ \hline
+\texttt{subsample} & \{0.6,0.8,1.0\} & 3 \\ \hline
+\texttt{max\_features} & \{None, sqrt, log2\} & 3 \\ \hline
+\end{tabular}
+\caption{Espacio de búsqueda de hiperparámetros para Gradient Boost}
+    \label{tab:Tabla_3}
+\end{table}
+Finalmente el gradient boost, que posee los párametros similares a adaboost, añadiendo el $subsample$, que es únicamente el dividir el conjunto de datos y pasarlo a cada árbol, es un muestreo sin reemplazo. Después está max\_features, que es la cantidad máxima de características por nodo. None, usa todas, $sqrt$ utiliza la raíz cuadrada de la cantidad de features y $\log_2$ el logaritmo base 2 de las características. La cantidad de combinaciones calculadas es de $3\times 3 \times 4 \times 3 \times 3 \times 3 \times3=2916$
+Después de realizar las pruebas, Se generaron 3 códigos de python, de los cuáles un archivo bash los ejecutará a manera de pipeline y guardará sus resultados en un archivo txt con el nombre del script. En base a esas características, se le pasaŕa al mejor modelo la gráfica comparativa y su matriz de confusión 
+\section{Resultados y Discusión}
+Tomando en cuenta la cantidad de combinaciones que se dieron para el random forest,(640). Además, se utilizó el dataset denominado en el código como \textit{ordenado}. Este dataset contiene 434 muestras, 60 menos que el completo, sin embargo, en ese dataset completo sobreajustaba al modelo.
+El random forest que se obtuvo por grid search, se encontraron los sioguientes hiperpárametros adecuados para el Cuadro \ref{tab:Tabla_4}. 
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Parámetro} & \textbf{Valores posibles}  \\ \hline
+    \texttt{n\_estimators} & 70  \\ \hline
+    \texttt{max\_depth} & None  \\ \hline
+    \texttt{min\_samples\_split} & 5  \\ \hline
+    \texttt{min\_samples\_leaf} & 1 \\ \hline
+    \texttt{bootstrap} & True \\ \hline
+    \texttt{Tiempo total} & 227.00 segundos \\ \hline
+    \texttt{Score en CV} & 99.021 \\ \hline
+    \texttt{Accuracy en test:} &96.825 \\ \hline
+    \end{tabular}
+    \caption{Mejores hiperpárametros para el Random Forest}
+    \label{tab:Tabla_4}
+\end{table}
+Los siguientes cuadros mostrarán los mejores hiperparámetros para cada adaboost y gradient boost, de acuerdo a sus leyendas
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Parámetro} & \textbf{Valores posibles}  \\ \hline
+    \texttt{n\_estimators} & 100  \\ \hline
+    \texttt{max\_depth} & 3  \\ \hline
+    \texttt{min\_samples\_split} & 2  \\ \hline
+
+    \texttt{learning\_rate} & 0.05 \\ \hline
+    \texttt{Tiempo total} & 101.913 segundos \\ \hline
+    \texttt{Score en CV} & 98.365 \\ \hline
+    \texttt{Accuracy en test:} &96.825 \\ \hline
+    \end{tabular}
+    \caption{Mejores hiperpárametros para el Adaboost}
+    \label{tab:Tabla_5}
+\end{table}
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Parámetro} & \textbf{Valores posibles}  \\ \hline
+    \texttt{n\_estimators} & 50  \\ \hline
+    \texttt{max\_depth} & 3  \\ \hline
+    \texttt{min\_samples\_split} & 2  \\ \hline
+    \texttt{min\_samples\_leaf} & 1  \\ \hline
+    \texttt{max\_features} & $\log_2$  \\ \hline
+    \texttt{subsamples} & 0.6  \\ \hline
+    \texttt{learning\_rate} & 0.01 \\ \hline
+    \texttt{Tiempo total} & 4425.95 segundos \\ \hline
+    \texttt{Score en CV} & 99.672 \\ \hline
+    \texttt{Accuracy en test:} &97.619 \\ \hline
+    \end{tabular}
+    \caption{Mejores hiperpárametros para el gradient boost}
+    \label{tab:Tabla_5}
+\end{table}
+Finalmente, en python se realizó un archivo llamado \texttt{package.py}, dentro de él, contiene todas las funciones relevantes para la práctica, de lo cual, 4 archivos lo llaman, \texttt{random\_forest},\texttt{adaboost}, \texttt{gradient} y\texttt{eval}. Estos tres primers archivos hacen la busqueda de hiperpárametros y son almacenados en una archivo de texto dentro de una carpeta con el mismo nombre del archivo de texto. \texttt{eval}, hace el cálculo de las curvas de aprendizaje y la matriz de confusión de cada modelo en base a lo que lee dentro del archivo de texto. Este proceso se puede mejorar con la librería \texttt{pickle}, ya que en el archivo de texto se tiene almacenado el objeto de python y en eval, se tiene que realizar un proceso de normalización del string.
+
+Analizando el cuadro \ref{tab:matrices_curvas}, podemos ver que para el modelo de random forest de manera análoga que el decision tree que se realizó en la tarea 1, posee una curva de entrenamiento al casi 1, mientras que la de validación va aprendiendo a lo largo del trayecto, ventajosamente, no se ha decaído conforme pasa la curva. Además de que acorde a la matriz de confusión, llega a haber una clase que logra parecerse al carro por parte del cloro y otra a una taza. Y el muñeco, hay una clase que la asemejaba a la silla, algo que en el decision tree no se veía. Por la parte de ada boost, en la matriz de confusión es similar a random forest, mientras que la curva de aprendizaje de nueva cuenta tiene el problema del entrenamiento, sin embargo la curva de validación es ligeramente distinta a la de random forest mostrandola un poco más suave. 
+Para gradient boost, al curva de entrenamiento presenta bajas y aunque el crecimiento de accuracy la validación es quasi lineal, llega una bajada en el último paso.
+Con esto en mente, se habían teorizado dos cosas en la tarea prevía, sin embargo ya se mencionaba o afirmaba que posiblemente haya características que estén generandole ruido al modelo, algunas han de tener información muy relacionada y que pueda ser útil o reducir las dimensiones o una selección de características. Esta prueba muestra que a pesar de tener un modelo robusto como random forest o los modelos de boosting, las características pueden jugar un papel decisivo a la hora de los resultados entre entrenamiento y validación. 
+De manera que, existen diversos procesos estadísticos que podrían servir para detectar que variables terminan siendo sobre información y no están aportando. Uno de ellos es la clásica correlación de Pearson, que describe la relación entre variables. ESto es debido a que la correlación es un tipo de kernel lineal,(un kernel es una función que mapea dentro de los valores del conjunto de datos, de tal manera que se puede escribir como un producto interno de características, con esto, se dice que un kernel es un espacio prehilberteano). Y por lo tanto, sus propiedades son herencia directa de la definición de un kernel. También se pueden realizar otros cálculos, tales como pruebas estadísticas como $\chi$, normal, anova, t student. De esta manera podemos identificar variables relevantes o que proporcionan información innecesaria.
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.5} % Espaciado entre filas
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Modelo} & \textbf{Matriz de Confusión} & \textbf{Curva de Aprendizaje} \\
+\hline
+Random Forest &
+\includegraphics[width=0.4\textwidth]{random_forest/confusion_matrix_random_forest.png} &
+\includegraphics[width=0.4\textwidth]{random_forest/learning_curve_random_forest.png} \\
+\hline
+AdaBoost &
+\includegraphics[width=0.4\textwidth]{Adaboost/confusion_matrix_Adaboost.png} &
+\includegraphics[width=0.4\textwidth]{Adaboost/learning_curve_Adaboost.png} \\
+\hline
+Gradient Boost &
+\includegraphics[width=0.4\textwidth]{gradient_boost/confusion_matrix_gradient_boost.png} &
+\includegraphics[width=0.4\textwidth]{gradient_boost/learning_curve_gradient_boost.png} \\
+\hline
+\end{tabular}
+\caption{Comparación de matrices de confusión y curvas de aprendizaje para cada modelo.}
+\label{tab:matrices_curvas}
+\end{table}
+
+
+\section{Conclusión}
+Por medio del entrenamiento de modelos más robusto, se demostró que dentro del conjunto de datos, existen variables que pueden presentar una correlación fuerte y hagan que los modelos en el entrenamiento se sobreajusten. A manera de dar pie a la teoría inicial de la tarea 1 que instaba a la reducción por el sobreajuste del entrenamiento.
+SIn embargo, podemos definir que para esta práctica, adaboost es el que resulto en ser un mejor modelo por su accuracy y tiempos de entrenamiento 
+
+\begin{thebibliography}{1}
+    \bibitem{ref1} Referencia en formato IEEE.
+\end{thebibliography}
+
+\end{document}

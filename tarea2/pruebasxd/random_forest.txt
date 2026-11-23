@@ -1,0 +1,4 @@
+⏱ Tiempo total de GridSearch: 225.46 segundos
+Mejores parámetros: {'bootstrap': True, 'max_depth': None, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 100}
+Mejor score CV: 0.9837123215230037
+Accuracy en test: 0.9761904761904762

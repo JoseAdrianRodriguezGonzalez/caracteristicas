@@ -1,0 +1,13 @@
+4425.954187870026
+{'learning_rate': 0.01, 'max_depth': 3, 'max_features': 'log2', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 50, 'subsample': 0.6}
+0.9967213114754099
+GradientBoostingClassifier(learning_rate=0.01, max_features='log2',
+                           n_estimators=50, random_state=42, subsample=0.6)
+0.9761904761904762
+7383.866737365723
+{'learning_rate': 0.01, 'max_depth': 5, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 5, 'n_estimators': 50, 'subsample': 1.0}
+0.9942028985507246
+GradientBoostingClassifier(learning_rate=0.01, max_depth=5, max_features='sqrt',
+                           min_samples_split=5, n_estimators=50,
+                           random_state=42)
+0.9864864864864865

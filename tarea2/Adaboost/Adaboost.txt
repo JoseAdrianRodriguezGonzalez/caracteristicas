@@ -1,0 +1,42 @@
+101.91377091407776
+{'estimator__max_depth': 3, 'estimator__min_samples_split': 2, 'learning_rate': 0.05, 'n_estimators': 100}
+0.9836594394500263
+AdaBoostClassifier(estimator=DecisionTreeClassifier(max_depth=3,
+                                                    random_state=42),
+                   learning_rate=0.05, n_estimators=100, random_state=42)
+0.9682539682539683
+102.87756609916687
+{'estimator__max_depth': 3, 'estimator__min_samples_split': 2, 'learning_rate': 0.1, 'n_estimators': 100}
+0.9836065573770492
+AdaBoostClassifier(estimator=DecisionTreeClassifier(max_depth=3,
+                                                    random_state=42),
+                   learning_rate=0.1, n_estimators=100, random_state=42)
+0.9692307692307692
+139.92018127441406
+{'estimator__max_depth': 3, 'estimator__min_samples_split': 2, 'learning_rate': 0.05, 'n_estimators': 100}
+0.9825660699062233
+AdaBoostClassifier(estimator=DecisionTreeClassifier(max_depth=3,
+                                                    random_state=42),
+                   learning_rate=0.05, n_estimators=100, random_state=42)
+0.9797297297297297
+5575.996115207672
+{'estimator__max_depth': 3, 'estimator__max_features': 'sqrt', 'estimator__min_samples_leaf': 1, 'estimator__min_samples_split': 5, 'learning_rate': 0.2, 'n_estimators': 300}
+0.9942028985507246
+AdaBoostClassifier(estimator=DecisionTreeClassifier(max_depth=3,
+                                                    max_features='sqrt',
+                                                    min_samples_split=5,
+                                                    random_state=42),
+                   learning_rate=0.2, n_estimators=300, random_state=42)
+0.9864864864864865
+number
+value
+datetime_start
+datetime_complete
+duration
+params_algorithm
+params_base_max_depth
+params_base_min_samples_leaf
+params_base_min_samples_split
+params_learning_rate
+params_n_estimators
+state
