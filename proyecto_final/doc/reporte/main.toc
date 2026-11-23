@@ -1,0 +1,5 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {chapter}{\numberline {1}Introducción y objetivos}{2}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Revisión de los conjuntos de datos}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}separación de lso conjuntos de datos}{3}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Aumnetación de los datos}{4}{section.2.2}%
